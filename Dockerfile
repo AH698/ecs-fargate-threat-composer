@@ -15,7 +15,4 @@ EXPOSE 8080
 # I used 'nginxinc/nginx-unprivileged' as it runs nginx
 # as a non root user 
 
-# nginx-unprivileged listens on port 8080 by default, unlike 
-# standard nginx, which listens on port 80 by default 
-
 
