@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-data "aws_availability_zones" "available" {
+data "aws_availability_zones" "az" {
   state = "available"
 }
 
@@ -22,3 +22,12 @@ resource "aws_route_table" "route_table" {
     gateway_id = aws_internet_gateway.igw.id
 }
 }
+
+resource "aws_subnet" "public_subnets" {
+  count = 2
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.public_cidr[count.index]
+  availability_zone = data.aws_availability_zones.az.names[count.index]
+  map_public_ip_on_launch = var.public_ip_on_launch
+}
+
