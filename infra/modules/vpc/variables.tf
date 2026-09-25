@@ -9,9 +9,3 @@ variable "Name" {
   
 }
 
-variable "state" {
-    description = "state of the AZ"
-    type = string
-    default = "available"
-  
-}
