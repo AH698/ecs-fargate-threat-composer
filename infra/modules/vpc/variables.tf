@@ -15,3 +15,15 @@ variable "cidr_block_rt" {
     type = string
     default = "0.0.0.0/0"
 }
+
+variable "public_cidr" {
+    description = "public subnets cidr block"
+    type = list(string)
+    default = [ "10.0.1.0/24" , "10.0.2.0/24" ]
+}
+
+variable "public_ip_on_launch" {
+  description = "A public ip that will be designated to both public subnets"
+  type = bool
+  default = true
+}
