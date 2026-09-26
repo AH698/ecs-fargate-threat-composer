@@ -26,7 +26,7 @@ variable "vpc_id" {
 variable "transport_layer" {
     description = "transport layer"
     type = string
-    default = "TCP"
+    default = "tcp"
   
 }
 
@@ -57,4 +57,11 @@ variable "egress_cidr" {
     description = "determines which ip add traffic can go to"
     type = list(string)
     default = [ "0.0.0.0/0" ]
+}
+
+variable "ingress_cidr" {
+    description = "determines which ip add can send traffic to alb"
+    type = list(string)
+    default = [ "0.0.0.0/0" ]
+  
 }
