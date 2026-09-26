@@ -4,9 +4,9 @@ variable "name" {
 }
 
 variable "image_tag_mutability" {
-    description = "MUTABLE OR IMMUTABLE"
-    type = string
-    default = "IMMUTABLE"
+  description = "MUTABLE OR IMMUTABLE"
+  type        = string
+  default     = "IMMUTABLE"
 }
 
 

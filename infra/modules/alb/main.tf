@@ -7,28 +7,47 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_security_group" "sg_alb" {
-  name = var.sg_alb
+  name   = var.sg_alb
   vpc_id = var.vpc_id
 
   ingress {
-    from_port        = var.http
-    to_port          = var.http
-    protocol         = var.transport_layer
-    cidr_blocks      = var.ingress_cidr
-  }  
+    from_port   = var.http
+    to_port     = var.http
+    protocol    = var.transport_layer
+    cidr_blocks = var.ingress_cidr
+  }
 
   ingress {
-    from_port        = var.https
-    to_port          = var.https
-    protocol         = var.transport_layer
-    cidr_blocks      = var.ingress_cidr
-  }  
+    from_port   = var.https
+    to_port     = var.https
+    protocol    = var.transport_layer
+    cidr_blocks = var.ingress_cidr
+  }
 
   egress {
-    from_port        = var.egress
-    to_port          = var.egress
-    protocol         = var.egress_protocol
-    cidr_blocks      = var.egress_cidr
+    from_port   = var.egress
+    to_port     = var.egress
+    protocol    = var.egress_protocol
+    cidr_blocks = var.egress_cidr
+  }
+}
+
+resource "aws_lb_target_group" "ip-tg" {
+  name        = var.tg_name
+  port        = var.tg_port
+  protocol    = var.tg_protocol
+  target_type = "ip"
+  vpc_id      = var.vpc_id
+
+  health_check {
+    path                = var.hc_tg_path
+    port                = var.tg_port
+    protocol            = var.tg_protocol
+    matcher             = var.hc_tg_matcher
+    interval            = var.hc_tg_interval
+    timeout             = var.hc_tg_timeout
+    healthy_threshold   = var.hc_tg_healthy_threshold
+    unhealthy_threshold = var.hc_tg_unhealthy_threshold
   }
 }
 

@@ -1,21 +1,21 @@
 variable "domain_name" {
-    description = "domain name for app"
-    type = string
+  description = "domain name for app"
+  type        = string
 }
 
 variable "r53_zone_name" {
-    description = "The name of the r53 zone" 
-    type = string
+  description = "The name of the r53 zone"
+  type        = string
 }
 
 variable "r53_private_zone" {
-    description = "r53 private zone"
-    type = bool
-    default = false
+  description = "r53 private zone"
+  type        = bool
+  default     = false
 }
 
 variable "ttl" {
-    description = "how long dns resolvers cache the record"
-    type = number
-    default = 60
+  description = "how long dns resolvers cache the record"
+  type        = number
+  default     = 60
 }
