@@ -90,8 +90,8 @@ variable "hc_tg_path" {
 }
 variable "hc_tg_matcher" {
   description = "status code that counts as a healthy response"
-  type        = number
-  default     = 200
+  type        = string
+  default     = "200"
 }
 
 variable "hc_tg_interval" {
