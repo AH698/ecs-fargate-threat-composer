@@ -119,18 +119,29 @@ variable "hc_tg_unhealthy_threshold" {
 }
 
 variable "alb_listener_1_protocol" {
-    description = "protocol"
-    type = string
-    default = "HTTPS"
+  description = "protocol"
+  type        = string
+  default     = "HTTPS"
 }
 
 variable "cert_arn" {
-    description = "arn of the acm certificate for the domain"
-    type = string
+  description = "arn of the acm certificate for the domain"
+  type        = string
 }
 
 variable "alb_listener_1_type" {
-    description = "action that listener takes on incoming requests"
-    type = string
-    default = "forward"  
+  description = "action that listener takes on incoming requests"
+  type        = string
+  default     = "forward"
+}
+
+variable "alb_listener_2_protocol" {
+  description = "protocol"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "alb_listener_2_status_code" {
+  description = "value"
+  type        = string
 }
