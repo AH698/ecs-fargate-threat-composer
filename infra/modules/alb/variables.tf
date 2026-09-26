@@ -23,7 +23,12 @@ variable "vpc_id" {
     type = string
 }
 
-# http ingress
+variable "transport_layer" {
+    description = "transport layer"
+    type = string
+    default = "TCP"
+  
+}
 
 variable "http" {
     description = "from port to port for http"
