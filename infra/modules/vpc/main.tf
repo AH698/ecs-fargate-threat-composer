@@ -24,10 +24,14 @@ resource "aws_route_table" "route_table" {
 }
 
 resource "aws_subnet" "public_subnets" {
-  count = 2
+  count = length(var.public_cidr)
   vpc_id     = aws_vpc.main.id
   cidr_block = var.public_cidr[count.index]
   availability_zone = data.aws_availability_zones.az.names[count.index]
   map_public_ip_on_launch = var.public_ip_on_launch
 }
 
+resource "aws_route_table_association" "example" {
+  subnet_id = aws_subnet.public_subnets[count.index].id
+  route_table_id = aws_route_table.route_table.id
+}
