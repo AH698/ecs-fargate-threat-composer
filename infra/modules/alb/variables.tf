@@ -142,6 +142,6 @@ variable "alb_listener_2_protocol" {
 }
 
 variable "alb_listener_2_status_code" {
-  description = "value"
+  description = "status code for the redirect"
   type        = string
 }
