@@ -65,3 +65,22 @@ variable "ingress_cidr" {
     default = [ "0.0.0.0/0" ]
   
 }
+
+variable "tg_name" {
+    description = "name of the tg"
+    type = string
+}
+
+variable "tg_port" {
+    description = "port containers listen on"
+    type = number
+    default = 8080
+}
+# it is 8080 because nginx-unpriviliged uses port 8080
+
+variable "tg_protocol" {
+    description = "protocol alb uses to send traffic to containers"
+    type = string
+    default = "HTTP"
+}
+
