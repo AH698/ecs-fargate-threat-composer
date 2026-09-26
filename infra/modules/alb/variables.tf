@@ -41,3 +41,20 @@ variable "https" {
     type = number
     default = 443
 }
+
+variable "egress" {
+    description = "allow all outbound"
+    type = number
+    default = 0
+}
+variable "egress_protocol" {
+    description = "all protocols"
+    type = string
+    default = "-1"
+}
+
+variable "egress_cidr" {
+    description = "determines which ip add traffic can go to"
+    type = list(string)
+    default = [ "0.0.0.0/0" ]
+}
