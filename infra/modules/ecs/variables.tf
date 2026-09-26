@@ -26,7 +26,7 @@ variable "ecs_sg_name" {
 }
 
 variable "alb_sg_id" {
-  description = "id of the alb security group "
+  description = "id of the alb security group"
   type        = string
 }
 
