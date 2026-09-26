@@ -30,7 +30,7 @@ variable "alb_sg_id" {
   type        = string
 }
 
-variable "ecs_sg_ingress" {
+variable "container_port" {
     description = "ports that are able to communicate with ecs"
     type = number
     default = 8080 
@@ -40,4 +40,22 @@ variable "ecs_sg_ingress_protocol" {
     description = "transport layer"
     type = string
     default = "tcp"
+}
+
+variable "ecs_sg_egress" {
+    description = "outbound traffic"
+    type = number
+    default = 0
+}
+
+variable "ecs_sg_egress_protocol" {
+    description = "protocols allowed"
+    type = string
+    default = "-1"
+}
+
+variable "cidr_blocks_egress" {
+    description = "determines which ip add traffic can go to"
+    type        = list(string)
+    default     = ["0.0.0.0/0"]  
 }
