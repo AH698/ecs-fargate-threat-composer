@@ -51,3 +51,15 @@ resource "aws_lb_target_group" "ip-tg" {
   }
 }
 
+resource "aws_lb_listener" "listener_1" {
+  load_balancer_arn = var.cert_arn
+  port              = var.https
+  protocol          = var.alb_listener_1_protocol
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = aws_acm_certificate_validation.cert_valid.certificate_arn
+
+  default_action {
+    type             = var.alb_listener_1_type
+    target_group_arn = aws_lb_target_group.ip-tg.arn
+  }
+}
