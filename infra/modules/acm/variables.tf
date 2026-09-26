@@ -14,3 +14,8 @@ variable "r53_private_zone" {
     default = false
 }
 
+variable "ttl" {
+    description = "how long dns resolvers cache the record"
+    type = number
+    default = 60
+}
