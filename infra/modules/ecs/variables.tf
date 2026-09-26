@@ -13,3 +13,14 @@ variable "iam_role_effect" {
     type = string
     default = "Allow"
 }
+
+
+variable "vpc_id" {
+  description = "the vpc id"
+  type        = string
+}
+
+variable "ecs_sg_name" {
+    description = "name of the ecs security group"
+    type = string
+}
