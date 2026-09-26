@@ -117,3 +117,20 @@ variable "hc_tg_unhealthy_threshold" {
   type        = number
   default     = 3
 }
+
+variable "alb_listener_1_protocol" {
+    description = "protocol"
+    type = string
+    default = "HTTPS"
+}
+
+variable "cert_arn" {
+    description = "arn of the acm certificate for the domain"
+    type = string
+}
+
+variable "alb_listener_1_type" {
+    description = "action that listener takes on incoming requests"
+    type = string
+    default = "forward"  
+}
