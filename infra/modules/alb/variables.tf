@@ -35,3 +35,9 @@ variable "http" {
     type = number
     default = 80
 }
+
+variable "https" {
+    description = "from port to port for https"
+    type = number
+    default = 443
+}
