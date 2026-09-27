@@ -76,7 +76,6 @@ variable "tg_port" {
   type        = number
   default     = 8080
 }
-# it is 8080 because nginx-unpriviliged uses port 8080
 
 variable "tg_protocol" {
   description = "protocol alb uses to send traffic to containers"
