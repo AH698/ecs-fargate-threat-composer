@@ -43,3 +43,29 @@ resource "aws_security_group" "ecs_sg" {
     cidr_blocks = var.cidr_blocks_egress
   }
 }
+
+resource "aws_ecs_task_definition" "test" {
+  family                   = var.ecs_family
+  requires_compatibilities = [var.ecs_requires_compatibilities]
+  network_mode             = var.ecs_network_node
+  cpu                      = var.ecs_task_def_cpu
+  memory                   = var.ecs_task_def_memory
+  execution_role_arn = aws_iam_role.ecs_task_execution_iam.arn
+  container_definitions    = jsonencode([
+    {
+      name      = var.container_name
+      image     = var.container_image
+      essential = var.container_essential
+      portMappings = [
+        {
+          containerPort = var.container_port
+        }
+      ]
+    }
+  ])
+  runtime_platform {
+    operating_system_family = var.operating_system_family
+    cpu_architecture        = var.cpu_architecture
+  }
+}
+
