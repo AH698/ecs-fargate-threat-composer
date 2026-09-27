@@ -25,3 +25,8 @@ variable "public_ip_on_launch" {
   type        = bool
   default     = true
 }
+
+variable "private_cidr" {
+  description = "private subnets cidr block"
+  type        = list(string)
+}
