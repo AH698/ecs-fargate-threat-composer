@@ -30,3 +30,8 @@ variable "private_cidr" {
   description = "private subnets cidr block"
   type        = list(string)
 }
+
+variable "ngw_name" {
+  description = "name of the ngw"
+  type = string
+}

@@ -49,3 +49,14 @@ resource "aws_subnet" "private_subnets" {
 resource "aws_eip" "eip" {
   domain   = "vpc"
 }
+
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_subnet.public_subnets[count.index].id
+
+  tags = {
+    Name = var.ngw_name
+  }
+
+  depends_on = [aws_internet_gateway]
+}
