@@ -52,11 +52,26 @@ resource "aws_eip" "eip" {
 
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.public_subnets[count.index].id
+  subnet_id     = aws_subnet.public_subnets[0].id
 
   tags = {
     Name = var.ngw_name
   }
 
-  depends_on = [aws_internet_gateway]
+  depends_on = [aws_internet_gateway.igw]
+}
+
+resource "aws_route_table" "priv_route_table" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = var.cidr_block_rt
+     nat_gateway_id = aws_nat_gateway.ngw.id
+  }
+}
+
+resource "aws_route_table_association" "priv_rt_association" {
+  count          = length(var.private_cidr)
+  subnet_id      = aws_subnet.private_subnets[count.index].id
+  route_table_id = aws_route_table.priv_route_table.id
 }
