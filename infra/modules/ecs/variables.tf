@@ -70,3 +70,24 @@ variable "ecs_task_def_memory" {
     type = number
 }
 
+variable "container_name" {
+    description = "name of the container"
+    type = string
+}
+
+variable "container_image" {
+    description = "image which is in ecr"
+    type = string
+}
+
+variable "container_essential" {
+    description = "value"
+    type = bool
+    default = true
+}
+
+variable "cpu_architecture" {
+  description = "cpu architecture of the image"
+  type        = string
+  default     = "ARM64"
+}
