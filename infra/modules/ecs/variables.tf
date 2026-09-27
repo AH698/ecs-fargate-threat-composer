@@ -59,3 +59,14 @@ variable "cidr_blocks_egress" {
     type        = list(string)
     default     = ["0.0.0.0/0"]  
 }
+
+variable "ecs_task_def_cpu" {
+    description = ""
+    type = number
+}
+
+variable "ecs_task_def_memory" {
+    description = ""
+    type = number
+}
+
