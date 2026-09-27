@@ -60,6 +60,21 @@ variable "cidr_blocks_egress" {
     default     = ["0.0.0.0/0"]  
 }
 
+variable "ecs_family" {
+    description = "name of task definition grouping all numbered revisions together"
+    type = string
+}
+
+variable "ecs_network_node" {
+    description = "docker networking mode to use for the containers in the task"
+    type = string
+}
+
+variable "ecs_requires_compatibilities" {
+    description = "launch type required by task"
+    type = string
+}
+
 variable "ecs_task_def_cpu" {
     description = "cpu units available to the task"
     type = number
@@ -84,6 +99,12 @@ variable "container_essential" {
     description = "value"
     type = bool
     default = true
+}
+
+variable "operating_system_family" {
+    description = "operating system family of the image"
+    type = string
+    default = "LINUX"
 }
 
 variable "cpu_architecture" {
