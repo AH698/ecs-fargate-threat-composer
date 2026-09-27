@@ -1,4 +1,4 @@
-resource "aws_ecs_cluster" "ecs-threat-composer" {
+resource "aws_ecs_cluster" "ecs_threat_composer" {
   name = var.cluster_name
 }
 
@@ -69,3 +69,24 @@ resource "aws_ecs_task_definition" "ecs_task_def" {
   }
 }
 
+resource "aws_ecs_service" "ecs_service" {
+  name            = var.service_name
+  cluster         = aws_ecs_cluster.ecs_threat_composer.id
+  task_definition = aws_ecs_task_definition.ecs_task_def.arn
+  desired_count   = var.service_desired_count
+  iam_role        = aws_iam_role.ecs_task_execution_iam.arn
+  depends_on      = [aws_iam_role_policy_attachment.iam_policy]
+  launch_type = var.service_launch_type
+
+  load_balancer {
+    target_group_arn = var.alb_tg
+    container_name   = var.container_name
+    container_port   = var.container_port
+  }
+
+  network_configuration {
+  subnets          = var.public_subnets_id
+  security_groups  = [aws_security_group.ecs_sg.id]
+  assign_public_ip = var.ecs_assign_public_ip
+  }
+}
