@@ -3,7 +3,7 @@ variable "cidr_block_vpc" {
   type        = string
 }
 
-variable "name" {
+variable "vpc_name" {
   description = "name of the vpc"
   type        = string
 
