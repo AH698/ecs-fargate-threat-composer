@@ -128,3 +128,19 @@ variable "service_launch_type" {
     description = "launch type to run service on"
     type = string 
 }
+
+variable "alb_tg" {
+    description = "refer to the alb tg in the root"
+    type = string
+}
+
+variable "public_subnets_id" {
+  description = "ids of the public subnets the tasks run in"
+  type        = list(string)
+}
+
+variable "ecs_assign_public_ip_" {
+    description = ""
+    type = bool
+    default = true
+}
