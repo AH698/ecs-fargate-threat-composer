@@ -30,9 +30,9 @@ resource "aws_security_group" "ecs_sg" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = var.container_port
-    to_port     = var.container_port
-    protocol    =  var.ecs_sg_ingress_protocol
+    from_port       = var.container_port
+    to_port         = var.container_port
+    protocol        = var.ecs_sg_ingress_protocol
     security_groups = [var.alb_sg_id]
   }
 
@@ -47,11 +47,11 @@ resource "aws_security_group" "ecs_sg" {
 resource "aws_ecs_task_definition" "ecs_task_def" {
   family                   = var.ecs_family
   requires_compatibilities = [var.ecs_requires_compatibilities]
-  network_mode             = var.ecs_network_node
+  network_mode             = var.ecs_network_mode
   cpu                      = var.ecs_task_def_cpu
   memory                   = var.ecs_task_def_memory
-  execution_role_arn = aws_iam_role.ecs_task_execution_iam.arn
-  container_definitions    = jsonencode([
+  execution_role_arn       = aws_iam_role.ecs_task_execution_iam.arn
+  container_definitions = jsonencode([
     {
       name      = var.container_name
       image     = var.container_image
@@ -74,9 +74,8 @@ resource "aws_ecs_service" "ecs_service" {
   cluster         = aws_ecs_cluster.ecs_threat_composer.id
   task_definition = aws_ecs_task_definition.ecs_task_def.arn
   desired_count   = var.service_desired_count
-  iam_role        = aws_iam_role.ecs_task_execution_iam.arn
   depends_on      = [aws_iam_role_policy_attachment.iam_policy]
-  launch_type = var.service_launch_type
+  launch_type     = var.service_launch_type
 
   load_balancer {
     target_group_arn = var.alb_tg
@@ -85,8 +84,8 @@ resource "aws_ecs_service" "ecs_service" {
   }
 
   network_configuration {
-  subnets          = var.public_subnets_id
-  security_groups  = [aws_security_group.ecs_sg.id]
-  assign_public_ip = var.ecs_assign_public_ip
+    subnets          = var.public_subnets_id
+    security_groups  = [aws_security_group.ecs_sg.id]
+    assign_public_ip = var.ecs_assign_public_ip
   }
 }

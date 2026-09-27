@@ -1,17 +1,17 @@
 variable "cluster_name" {
-    description = "name of the cluster"
-    type = string
+  description = "name of the cluster"
+  type        = string
 }
 
 variable "ecs_iam_execution_name" {
-    description = "name of the ecs task execution iam role"
-    type = string
+  description = "name of the ecs task execution iam role"
+  type        = string
 }
 
 variable "iam_role_effect" {
-    description = "either permits or denies action"
-    type = string
-    default = "Allow"
+  description = "either permits or denies action"
+  type        = string
+  default     = "Allow"
 }
 
 
@@ -21,8 +21,8 @@ variable "vpc_id" {
 }
 
 variable "ecs_sg_name" {
-    description = "name of the ecs security group"
-    type = string
+  description = "name of the ecs security group"
+  type        = string
 }
 
 variable "alb_sg_id" {
@@ -31,82 +31,82 @@ variable "alb_sg_id" {
 }
 
 variable "container_port" {
-    description = "ports that are able to communicate with ecs"
-    type = number
-    default = 8080 
+  description = "ports that are able to communicate with ecs"
+  type        = number
+  default     = 8080
 }
 
 variable "ecs_sg_ingress_protocol" {
-    description = "transport layer"
-    type = string
-    default = "tcp"
+  description = "transport layer"
+  type        = string
+  default     = "tcp"
 }
 
 variable "ecs_sg_egress" {
-    description = "outbound traffic"
-    type = number
-    default = 0
+  description = "outbound traffic"
+  type        = number
+  default     = 0
 }
 
 variable "ecs_sg_egress_protocol" {
-    description = "protocols allowed"
-    type = string
-    default = "-1"
+  description = "protocols allowed"
+  type        = string
+  default     = "-1"
 }
 
 variable "cidr_blocks_egress" {
-    description = "determines which ip add traffic can go to"
-    type        = list(string)
-    default     = ["0.0.0.0/0"]  
+  description = "determines which ip add traffic can go to"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
 }
 
 variable "ecs_family" {
-    description = "name of task definition grouping all numbered revisions together"
-    type = string
+  description = "name of task definition grouping all numbered revisions together"
+  type        = string
 }
 
 variable "ecs_network_mode" {
-    description = "docker networking mode to use for the containers in the task"
-    type = string
-    default = "awsvpc"
+  description = "docker networking mode to use for the containers in the task"
+  type        = string
+  default     = "awsvpc"
 }
 
 variable "ecs_requires_compatibilities" {
-    description = "launch type required by task"
-    type = string
-    default = "FARGATE"
+  description = "launch type required by task"
+  type        = string
+  default     = "FARGATE"
 }
 
 variable "ecs_task_def_cpu" {
-    description = "cpu units available to the task"
-    type = number
+  description = "cpu units available to the task"
+  type        = number
 }
 
 variable "ecs_task_def_memory" {
-    description = "memory in mib available to the task"
-    type = number
+  description = "memory in mib available to the task"
+  type        = number
 }
 
 variable "container_name" {
-    description = "name of the container"
-    type = string
+  description = "name of the container"
+  type        = string
 }
 
 variable "container_image" {
-    description = "image which is in ecr"
-    type = string
+  description = "image which is in ecr"
+  type        = string
 }
 
 variable "container_essential" {
-    description = "value"
-    type = bool
-    default = true
+  description = "value"
+  type        = bool
+  default     = true
 }
 
 variable "operating_system_family" {
-    description = "operating system family of the image"
-    type = string
-    default = "LINUX"
+  description = "operating system family of the image"
+  type        = string
+  default     = "LINUX"
 }
 
 variable "cpu_architecture" {
@@ -115,25 +115,25 @@ variable "cpu_architecture" {
 }
 
 variable "service_name" {
-    description = "the name of the ecs service"
-    type = string
+  description = "the name of the ecs service"
+  type        = string
 }
 
 variable "service_desired_count" {
-    description = "number of instances of the task definition to place and keep running"
-    type = number
-    default = 1  
+  description = "number of instances of the task definition to place and keep running"
+  type        = number
+  default     = 1
 }
 
 variable "service_launch_type" {
-    description = "launch type to run service on"
-    type = string 
-    default = "FARGATE"
+  description = "launch type to run service on"
+  type        = string
+  default     = "FARGATE"
 }
 
 variable "alb_tg" {
-    description = "refer to the alb tg in the root"
-    type = string
+  description = "refer to the alb tg in the root"
+  type        = string
 }
 
 variable "public_subnets_id" {
@@ -142,7 +142,7 @@ variable "public_subnets_id" {
 }
 
 variable "ecs_assign_public_ip" {
-    description = "auto assign public ip for ecs"
-    type = bool
-    default = true
+  description = "auto assign public ip for ecs"
+  type        = bool
+  default     = true
 }
