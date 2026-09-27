@@ -65,9 +65,10 @@ variable "ecs_family" {
     type = string
 }
 
-variable "ecs_network_node" {
+variable "ecs_network_mode" {
     description = "docker networking mode to use for the containers in the task"
     type = string
+    default = "awsvpc"
 }
 
 variable "ecs_requires_compatibilities" {
