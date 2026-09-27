@@ -139,7 +139,7 @@ variable "public_subnets_id" {
   type        = list(string)
 }
 
-variable "ecs_assign_public_ip_" {
+variable "ecs_assign_public_ip" {
     description = ""
     type = bool
     default = true
