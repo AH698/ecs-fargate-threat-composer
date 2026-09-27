@@ -112,3 +112,19 @@ variable "cpu_architecture" {
   type        = string
   default     = "ARM64"
 }
+
+variable "service_name" {
+    description = "the name of the ecs service"
+    type = string
+}
+
+variable "service_desired_count" {
+    description = "number of instances of the task definition to place and keep running"
+    type = number
+    default = 1  
+}
+
+variable "service_launch_type" {
+    description = "launch type to run service on"
+    type = string 
+}
