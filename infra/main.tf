@@ -12,7 +12,8 @@ module "vpc" {
 
 module "acm" {
   source = "./modules/acm"
-
+  domain_name = var.domain_name
+  r53_zone_name = var.r53_zone_name
 }
 
 module "alb" {
