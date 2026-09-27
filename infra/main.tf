@@ -1,6 +1,6 @@
 module "ecr" {
   source = "./modules/ecr"
-  name = var.ecr_name
+  ecr_name = var.ecr_name
 }
 
 module "vpc" {
@@ -30,10 +30,22 @@ module "alb" {
 
 module "ecs" {
   source = "./modules/ecs"
-
+  cluster_name = var.cluster_name
+  ecs_iam_execution_name = var.ecs_iam_execution_name
+  ecs_sg_name = var.ecs_sg_name
+  vpc_id = module.vpc.vpc_id
+  alb_sg_id = module.alb.alb_sg_id
+  ecs_family = var.ecs_family
+  ecs_task_def_cpu = var.ecs_task_def_cpu
+  ecs_task_def_memory = var.ecs_task_def_memory
+  container_name =
+  container_image =
+  cpu_architecture =
+  service_name = var.service_name
+  alb_tg = module.alb.alb_tg_arn
+  public_subnets_id = module.vpc.public_subnets_ids
 }
 
 module "route53" {
   source = "./modules/route53"
-
 }

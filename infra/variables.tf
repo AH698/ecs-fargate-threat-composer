@@ -1,8 +1,10 @@
+# alb module 
 variable "ecr_name" {
   description = "Name of the ECR repository"
   type        = string
 }
 
+# vpc module 
 variable "vpc_name" {
   description = "name of the vpc"
   type        = string
@@ -19,6 +21,7 @@ variable "public_cidr" {
   type        = list(string)
 }
 
+# acm module 
 variable "domain_name" {
   description = "domain name for app"
   type        = string
@@ -29,6 +32,7 @@ variable "r53_zone_name" {
   type        = string
 }
 
+# alb module 
 variable "alb_name" {
   description = "the name of the alb"
   type        = string
@@ -52,4 +56,47 @@ variable "tg_name" {
 variable "hc_tg_path" {
   description = "path for health check"
   type        = string
+}
+
+# ecs module 
+variable "cluster_name" {
+  description = "name of the cluster"
+  type        = string
+}
+
+variable "ecs_iam_execution_name" {
+  description = "name of the ecs task execution iam role"
+  type        = string
+}
+
+variable "ecs_sg_name" {
+  description = "name of the ecs security group"
+  type        = string
+}
+
+variable "ecs_family" {
+  description = "name of task definition grouping all numbered revisions together"
+  type        = string
+}
+
+variable "ecs_task_def_cpu" {
+  description = "cpu units available to the task"
+  type        = number
+}
+
+variable "ecs_task_def_memory" {
+  description = "memory in mib available to the task"
+  type        = number
+}
+
+
+variable "service_name" {
+  description = "the name of the ecs service"
+  type        = string
+}
+
+# route 53 module 
+variable "type" {
+    description = "dns_type"
+    type = string
 }
