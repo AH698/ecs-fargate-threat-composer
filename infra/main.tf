@@ -18,7 +18,14 @@ module "acm" {
 
 module "alb" {
   source = "./modules/alb"
-
+  alb_name = var.alb_name
+  vpc_id = module.vpc.vpc_id
+  public_subnets_id = module.vpc.public_subnets_ids
+  cert_arn = module.acm.acm_cert
+  sg_alb = var.sg_alb
+  alb_listener_2_status_code = var.alb_listener_2_status_code
+  tg_name = var.tg_name
+  hc_tg_path = var.hc_tg_path
 }
 
 module "ecs" {
