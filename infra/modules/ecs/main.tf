@@ -44,7 +44,7 @@ resource "aws_security_group" "ecs_sg" {
   }
 }
 
-resource "aws_ecs_task_definition" "test" {
+resource "aws_ecs_task_definition" "ecs_task_def" {
   family                   = var.ecs_family
   requires_compatibilities = [var.ecs_requires_compatibilities]
   network_mode             = var.ecs_network_node
