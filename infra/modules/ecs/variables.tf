@@ -118,7 +118,7 @@ variable "alb_tg" {
   type        = string
 }
 
-variable "public_subnets_id" {
+variable "priv_subnets_id" {
   description = "ids of the public subnets the tasks run in"
   type        = list(string)
 }
