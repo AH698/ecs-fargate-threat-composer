@@ -14,6 +14,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 }
 
+# public
 resource "aws_route_table" "route_table" {
   vpc_id = aws_vpc.main.id
 
@@ -35,4 +36,16 @@ resource "aws_route_table_association" "rt_association" {
   count          = length(var.public_cidr)
   subnet_id      = aws_subnet.public_subnets[count.index].id
   route_table_id = aws_route_table.route_table.id
+}
+
+# private 
+resource "aws_subnet" "private_subnets" {
+  count                   = length(var.private_cidr)
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.private_cidr[count.index]
+  availability_zone       = data.aws_availability_zones.az.names[count.index]
+}
+
+resource "aws_eip" "eip" {
+  domain   = "vpc"
 }
