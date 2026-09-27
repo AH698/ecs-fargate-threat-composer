@@ -38,8 +38,8 @@ module "ecs" {
   ecs_family = var.ecs_family
   ecs_task_def_cpu = var.ecs_task_def_cpu
   ecs_task_def_memory = var.ecs_task_def_memory
-  container_name =
-  container_image =
+  container_name = var.container_name
+  container_image = "${module.ecr.repository_url}:${var.image_tag}"
   cpu_architecture =
   service_name = var.service_name
   alb_tg = module.alb.alb_tg_arn

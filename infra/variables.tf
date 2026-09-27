@@ -89,6 +89,15 @@ variable "ecs_task_def_memory" {
   type        = number
 }
 
+variable "container_name" {
+  description = "name of the container"
+  type        = string
+}
+
+variable "container_image" {
+  description = "image which is in ecr"
+  type        = string
+}
 
 variable "service_name" {
   description = "the name of the ecs service"
