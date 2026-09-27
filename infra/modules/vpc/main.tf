@@ -40,14 +40,14 @@ resource "aws_route_table_association" "rt_association" {
 
 # private 
 resource "aws_subnet" "private_subnets" {
-  count                   = length(var.private_cidr)
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.private_cidr[count.index]
-  availability_zone       = data.aws_availability_zones.az.names[count.index]
+  count             = length(var.private_cidr)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.private_cidr[count.index]
+  availability_zone = data.aws_availability_zones.az.names[count.index]
 }
 
 resource "aws_eip" "eip" {
-  domain   = "vpc"
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "ngw" {
@@ -65,8 +65,8 @@ resource "aws_route_table" "priv_route_table" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = var.cidr_block_rt
-     nat_gateway_id = aws_nat_gateway.ngw.id
+    cidr_block     = var.cidr_block_rt
+    nat_gateway_id = aws_nat_gateway.ngw.id
   }
 }
 

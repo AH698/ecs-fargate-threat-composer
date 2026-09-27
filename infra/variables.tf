@@ -21,6 +21,16 @@ variable "public_cidr" {
   type        = list(string)
 }
 
+variable "ngw_name" {
+  description = "name of the ngw"
+  type        = string
+}
+
+variable "private_cidr" {
+  description = "private subnets cidr block"
+  type        = list(string)
+}
+
 # acm module 
 variable "domain_name" {
   description = "domain name for app"
@@ -106,8 +116,8 @@ variable "service_name" {
 
 # route 53 module 
 variable "type" {
-    description = "dns_type"
-    type = string
+  description = "dns_type"
+  type        = string
 }
 
 # image tag

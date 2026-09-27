@@ -33,6 +33,6 @@ variable "private_cidr" {
 
 variable "ngw_name" {
   description = "name of the ngw"
-  type = string
+  type        = string
 }
 
