@@ -46,8 +46,8 @@ resource "aws_security_group" "ecs_sg" {
 
 resource "aws_ecs_task_definition" "ecs_task_def" {
   family                   = var.ecs_family
-  requires_compatibilities = [var.ecs_requires_compatibilities]
-  network_mode             = var.ecs_network_mode
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
   cpu                      = var.ecs_task_def_cpu
   memory                   = var.ecs_task_def_memory
   execution_role_arn       = aws_iam_role.ecs_task_execution_iam.arn
@@ -75,7 +75,7 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.ecs_task_def.arn
   desired_count   = var.service_desired_count
   depends_on      = [aws_iam_role_policy_attachment.iam_policy]
-  launch_type     = var.service_launch_type
+  launch_type     = "FARGATE"
 
   load_balancer {
     target_group_arn = var.alb_tg

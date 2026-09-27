@@ -65,18 +65,6 @@ variable "ecs_family" {
   type        = string
 }
 
-variable "ecs_network_mode" {
-  description = "docker networking mode to use for the containers in the task"
-  type        = string
-  default     = "awsvpc"
-}
-
-variable "ecs_requires_compatibilities" {
-  description = "launch type required by task"
-  type        = string
-  default     = "FARGATE"
-}
-
 variable "ecs_task_def_cpu" {
   description = "cpu units available to the task"
   type        = number
@@ -123,12 +111,6 @@ variable "service_desired_count" {
   description = "number of instances of the task definition to place and keep running"
   type        = number
   default     = 1
-}
-
-variable "service_launch_type" {
-  description = "launch type to run service on"
-  type        = string
-  default     = "FARGATE"
 }
 
 variable "alb_tg" {
