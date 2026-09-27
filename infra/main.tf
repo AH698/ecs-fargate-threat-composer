@@ -48,6 +48,10 @@ module "ecs" {
 
 module "route53" {
   source = "./modules/route53"
-  
+  domain_name = var.domain_name
+  type = var.type
+  r53_zone_id = module.acm.r53_zone_id
+  alb_dns = module.alb.alb_dns
+  alb_zone_id = module.alb.alb_zone_id
 }
 
