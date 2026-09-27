@@ -142,7 +142,7 @@ variable "public_subnets_id" {
 }
 
 variable "ecs_assign_public_ip" {
-    description = ""
+    description = "auto assign public ip for ecs"
     type = bool
     default = true
 }
