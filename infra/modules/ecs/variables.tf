@@ -111,7 +111,6 @@ variable "operating_system_family" {
 variable "cpu_architecture" {
   description = "cpu architecture of the image"
   type        = string
-  default     = "ARM64"
 }
 
 variable "service_name" {
