@@ -61,12 +61,12 @@ variable "cidr_blocks_egress" {
 }
 
 variable "ecs_task_def_cpu" {
-    description = ""
+    description = "cpu units available to the task"
     type = number
 }
 
 variable "ecs_task_def_memory" {
-    description = ""
+    description = "memory in mib available to the task"
     type = number
 }
 
