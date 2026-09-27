@@ -40,7 +40,7 @@ module "ecs" {
   ecs_task_def_memory = var.ecs_task_def_memory
   container_name = var.container_name
   container_image = "${module.ecr.repository_url}:${var.image_tag}"
-  cpu_architecture =
+  cpu_architecture = 
   service_name = var.service_name
   alb_tg = module.alb.alb_tg_arn
   public_subnets_id = module.vpc.public_subnets_ids
@@ -48,4 +48,6 @@ module "ecs" {
 
 module "route53" {
   source = "./modules/route53"
+  
 }
+

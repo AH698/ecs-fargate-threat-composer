@@ -94,8 +94,8 @@ variable "container_name" {
   type        = string
 }
 
-variable "container_image" {
-  description = "image which is in ecr"
+variable "cpu_architecture" {
+  description = "cpu architecture of the image"
   type        = string
 }
 
@@ -108,4 +108,10 @@ variable "service_name" {
 variable "type" {
     description = "dns_type"
     type = string
+}
+
+# image tag
+variable "image_tag" {
+  description = "commit sha of the image to deploy"
+  type        = string
 }
