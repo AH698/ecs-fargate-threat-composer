@@ -73,6 +73,7 @@ variable "ecs_network_node" {
 variable "ecs_requires_compatibilities" {
     description = "launch type required by task"
     type = string
+    default = "FARGATE"
 }
 
 variable "ecs_task_def_cpu" {
@@ -127,6 +128,7 @@ variable "service_desired_count" {
 variable "service_launch_type" {
     description = "launch type to run service on"
     type = string 
+    default = "FARGATE"
 }
 
 variable "alb_tg" {
