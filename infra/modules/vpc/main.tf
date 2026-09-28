@@ -15,6 +15,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 # public
+
 resource "aws_route_table" "route_table" {
   vpc_id = aws_vpc.main.id
 
@@ -39,6 +40,7 @@ resource "aws_route_table_association" "rt_association" {
 }
 
 # private 
+
 resource "aws_subnet" "private_subnets" {
   count             = length(var.private_cidr)
   vpc_id            = aws_vpc.main.id
@@ -47,31 +49,28 @@ resource "aws_subnet" "private_subnets" {
 }
 
 resource "aws_eip" "eip" {
+  count  = length(var.private_cidr)
   domain = "vpc"
 }
 
 resource "aws_nat_gateway" "ngw" {
-  allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.public_subnets[0].id
-
-  tags = {
-    Name = var.ngw_name
-  }
-
+  count  = length(var.private_cidr)
+  allocation_id = aws_eip.eip[count.index].id
+  subnet_id     = aws_subnet.public_subnets[count.index].id
   depends_on = [aws_internet_gateway.igw]
 }
 
 resource "aws_route_table" "priv_route_table" {
+  count = length(var.private_cidr)
   vpc_id = aws_vpc.main.id
-
   route {
     cidr_block     = var.cidr_block_rt
-    nat_gateway_id = aws_nat_gateway.ngw.id
+    nat_gateway_id = aws_nat_gateway.ngw[count.index].id
   }
 }
 
 resource "aws_route_table_association" "priv_rt_association" {
   count          = length(var.private_cidr)
   subnet_id      = aws_subnet.private_subnets[count.index].id
-  route_table_id = aws_route_table.priv_route_table.id
+  route_table_id = aws_route_table.priv_route_table[count.index].id
 }
