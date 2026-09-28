@@ -8,7 +8,6 @@ module "vpc" {
   vpc_name       = var.vpc_name
   cidr_block_vpc = var.cidr_block_vpc
   public_cidr    = var.public_cidr
-  ngw_name       = var.ngw_name
   private_cidr   = var.private_cidr
 }
 

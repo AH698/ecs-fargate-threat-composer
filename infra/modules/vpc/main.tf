@@ -54,14 +54,14 @@ resource "aws_eip" "eip" {
 }
 
 resource "aws_nat_gateway" "ngw" {
-  count  = length(var.private_cidr)
+  count         = length(var.private_cidr)
   allocation_id = aws_eip.eip[count.index].id
   subnet_id     = aws_subnet.public_subnets[count.index].id
-  depends_on = [aws_internet_gateway.igw]
+  depends_on    = [aws_internet_gateway.igw]
 }
 
 resource "aws_route_table" "priv_route_table" {
-  count = length(var.private_cidr)
+  count  = length(var.private_cidr)
   vpc_id = aws_vpc.main.id
   route {
     cidr_block     = var.cidr_block_rt

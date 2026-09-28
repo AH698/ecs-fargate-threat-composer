@@ -21,11 +21,6 @@ variable "public_cidr" {
   type        = list(string)
 }
 
-variable "ngw_name" {
-  description = "name of the ngw"
-  type        = string
-}
-
 variable "private_cidr" {
   description = "private subnets cidr block"
   type        = list(string)
