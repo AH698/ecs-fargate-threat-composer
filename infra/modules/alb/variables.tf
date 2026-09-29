@@ -5,7 +5,7 @@ variable "alb_name" {
 variable "internal" {
   description = "decides whether alb is reachable from internet"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "public_subnets_id" {
