@@ -4,4 +4,3 @@
 *.tfstate
 *.tfstate.*
 crash.log
-.trivyignore
