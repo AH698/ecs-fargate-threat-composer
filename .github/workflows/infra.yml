@@ -19,6 +19,7 @@ jobs:
         permissions: 
             id-token: write 
             contents: read 
+            security-events: write
         
         steps: 
             - name: checkout code 
@@ -56,6 +57,9 @@ jobs:
             - name: terraform initalize
               run: terraform init
 
+            - name: terraform validate 
+              run: terraform validate
+
             - name: Set up TFLint
               uses: terraform-linters/setup-tflint@v6
               with: 
@@ -72,3 +76,6 @@ jobs:
 
             - name: Run TFLint
               run: tflint -f compact
+
+            - name: terraform plan
+              run: terraform plan
