@@ -4,6 +4,7 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sg_alb.id]
   subnets            = var.public_subnets_id
+  drop_invalid_header_fields = true 
 }
 
 resource "aws_security_group" "sg_alb" {
