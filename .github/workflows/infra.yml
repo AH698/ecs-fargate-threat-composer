@@ -1,0 +1,61 @@
+name: Initalize, format, plan and apply Iac
+
+on: 
+    push: 
+        branches: 
+            - main 
+        paths: 
+            - 'infra/**'
+    workflow_dispatch: 
+
+jobs: 
+    infra_init-fmt-plan: 
+        runs-on: ubuntu-latest
+
+        defaults: 
+         run: 
+            working-directory: infra
+
+        permissions: 
+            id-token: write 
+            contents: read 
+        
+        steps: 
+            - name: checkout code 
+              uses: actions/checkout@v4
+
+            - name: configure AWS credentials 
+              uses: aws-actions/configure-aws-credentials@v6.3.0
+              with: 
+                aws-region: ${{ secrets.AWS_REGION }}
+                role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+                role-session-name: infra_init-fmt-plan
+
+            - name: install terraform 
+              uses: hashicorp/setup-terraform@v4
+
+            - name: terraform format
+              run: terraform fmt -check
+            
+            - name: terraform initalize
+              run: terraform init
+
+            - name: Set up TFLint
+              uses: terraform-linters/setup-tflint@v6
+              with: 
+                tflint_version: v0.52.0
+                cache: true
+
+            - name: Show version
+              run: tflint --version
+
+            - name: Init TFLint
+              run: tflint --init
+              env:
+                GITHUB_TOKEN: ${{ github.token }}
+
+            - name: Run TFLint
+              run: tflint -f compact
+
+
+
