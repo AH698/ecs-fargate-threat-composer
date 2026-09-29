@@ -43,14 +43,14 @@ variable "https" {
 }
 
 variable "egress" {
-  description = "allow all outbound"
+  description = "alb outbound traffic"
   type        = number
-  default     = 0
+  default     = 8000
 }
 variable "egress_protocol" {
-  description = "all protocols"
+  description = "protocol type"
   type        = string
-  default     = "-1"
+  default     = "tcp"
 }
 
 variable "egress_cidr" {
