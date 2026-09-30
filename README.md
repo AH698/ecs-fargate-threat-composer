@@ -76,8 +76,8 @@ To deploy this project yourself, you'll need:
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/AH698/ecs-fargate-threat-composer.git
-cd ecs-fargate-threat-composer
+git clone https://github.com/AH698/ecs-fargate-threat-composer-project.git
+cd ecs-fargate-threat-composer-project
 ```
 
 ### Run the app locally
@@ -140,3 +140,25 @@ There are three GitHub Actions pipelines. The image pipeline lints the Dockerfil
 scans it with Trivy, and only pushes it to ECR if both checks pass, tagged with the commit SHA. The infrastructure pipeline runs a Trivy scan, 
 formatting, validation and TFLint before creating a plan, then pauses for manual approval on a protected production environment before applying. 
 The destroy pipeline can only be started manually. All three authenticate to AWS with OIDC, so no access keys are stored in GitHub.
+
+## App Demo
+
+![Threat Composer running over HTTPS](images/live-app-https.png)
+
+![Short demo of the live app](images/live-app-demo.gif)
+
+## Pipeline Screenshots
+
+### Image pipeline
+
+![Image pipeline run](images/Docker-image-build:push-pipeline.png)
+
+### Plan and apply pipeline
+
+![Plan job](images/infra-fmt-plan-pipeline.png)
+
+![Apply job](images/infra-apply-pipeline.png)
+
+### Destroy pipeline
+
+![Destroy pipeline run](images/Terraform-destroy-pipeline.png)
