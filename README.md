@@ -13,3 +13,5 @@ pipelines includes security scanning. Authentication is processed via OIDC, whic
 short-lived credentials for each run, so no long-lived access keys are ever stored 
 in GitHub.
 
+## Architecture diagram
+![Architecture diagram](images/architecture-diagram.png)
