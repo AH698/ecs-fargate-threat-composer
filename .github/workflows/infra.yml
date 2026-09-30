@@ -85,3 +85,40 @@ jobs:
 
             - name: terraform plan
               run: terraform plan
+
+    infra_apply:
+        runs-on: ubuntu-latest
+        needs: infra_init-fmt-plan
+        environment: production
+        
+        defaults: 
+         run: 
+            working-directory: infra
+
+        permissions: 
+            id-token: write 
+            contents: read 
+            
+        steps: 
+          - name: checkout code 
+            uses: actions/checkout@v4
+
+          - name: configure AWS credentials 
+            uses: aws-actions/configure-aws-credentials@v6.3.0
+            with: 
+              aws-region: ${{ secrets.AWS_REGION }}
+              role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+              role-session-name: infra_apply
+
+          - name: install terraform 
+            uses: hashicorp/setup-terraform@v4
+            with: 
+              terraform_version: 1.16.1
+            
+          - name: terraform initalize
+            run: terraform init
+
+          - name: run terraform apply 
+            run: terraform apply -auto-approve
+
+
