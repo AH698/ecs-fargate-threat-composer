@@ -15,3 +15,33 @@ in GitHub.
 
 ## Architecture diagram
 ![Architecture diagram](images/architecture-diagram.png)
+
+## Repository structure 
+```text
+.
+├── .github
+│   └── workflows
+│       ├── destroy.yml
+│       ├── image.yml
+│       └── infra.yml
+├── app/
+├── images/
+├── infra
+│   ├── modules
+│   │   ├── acm/
+│   │   ├── alb/
+│   │   ├── ecr/
+│   │   ├── ecs/
+│   │   ├── route53/
+│   │   └── vpc/
+│   ├── .terraform.lock.hcl
+│   ├── main.tf
+│   ├── provider.tf
+│   ├── terraform.tfvars
+│   └── variables.tf
+├── .dockerignore
+├── .gitignore
+├── .trivyignore
+├── Dockerfile
+└── README.md
+```
