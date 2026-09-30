@@ -56,7 +56,6 @@ in GitHub.
 - Trivy
 - Hadolint
 - TFLint
-- CodeQL
 
 ## Local Setup
 
