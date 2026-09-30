@@ -45,7 +45,7 @@ variable "https" {
 variable "egress" {
   description = "alb outbound traffic"
   type        = number
-  default     = 8000
+  default     = 8080
 }
 variable "egress_protocol" {
   description = "protocol type"
