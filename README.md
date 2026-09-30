@@ -46,6 +46,18 @@ in GitHub.
 └── README.md
 ```
 
+## Tech Stack
+
+- AWS: ECS Fargate, ALB, ECR, ACM, Route 53, VPC, CloudWatch, S3, IAM
+- Terraform
+- GitHub Actions
+- Docker
+- nginx
+- Trivy
+- Hadolint
+- TFLint
+- CodeQL
+
 ## Local Setup
 
 ### Prerequisites
