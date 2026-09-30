@@ -1,6 +1,6 @@
 # Threat Composer on AWS ECS Fargate 
 
-## Description
+## Project overview
 
 A production-style deployment of AWS Threat Composer, a threat modelling tool, running as a
 container on Amazon ECS Fargate behind an Application Load Balancer and served over HTTPS 
@@ -97,3 +97,35 @@ The container listens on port 8080 because it uses the non-root nginx image, and
 4. Run the image workflow to build, scan and push the container image to ECR.
 5. Push a change inside `infra/`, or run the infrastructure workflow manually. Review the plan, then approve the apply in Review deployments.
 6. When you've finished, run the destroy workflow to tear everything down.
+
+## How It Works
+
+### Dockerfile 
+
+The Dockerfile is the recipe for building the container image. Because the image contains everything the app needs,
+it runs the same way on my machine, in the pipeline and in AWS, which solves the "it works on my machine" problem. 
+It is a multi-stage build. The first stage compiles the app with Node, and the second stage copies only the built files into nginx-unprivileged. 
+This keeps the final image small and free of build tools.The final image runs nginx as a non-root user, so a compromised container would not have 
+root permissions. A non-root user cannot use ports below 1024, which is why the container listens on port 8080 instead of 80.
+
+### Terraform remote backend
+
+Terraform stores its state in an S3 bucket, with encryption turned on and lockfile locking enabled. 
+This matters because the pipeline runners are thrown away after every run, so the state has to live somewhere shared for plan and apply to see the same infrastructure.
+ Locking stops two runs from changing the state at the same time. The bucket itself is created outside Terraform, 
+ because the code can't store its state in a bucket that doesn't exist yet.
+
+### Terraform best practices
+
+The infrastructure is split into modules for the VPC, ALB, ECR, ECS, ACM and Route 53, and the root module only wires them together using each 
+module's outputs. This keeps the code DRY (Dont Repeat Yourself) values live in variables with defaults 
+and in `terraform.tfvars`, and `count` builds the subnets in both availability zones from a single block instead of copying it. 
+The root pins exact Terraform and provider versions, while each module only sets a minimum, so upgrades only need to be changed in one place. 
+Formatting, validation and TFLint run in the pipeline, so problems are caught before anything is planned.
+
+### Pipelines
+
+There are three GitHub Actions pipelines. The image pipeline lints the Dockerfile with Hadolint, builds the image, 
+scans it with Trivy, and only pushes it to ECR if both checks pass, tagged with the commit SHA. The infrastructure pipeline runs a Trivy scan, 
+formatting, validation and TFLint before creating a plan, then pauses for manual approval on a protected production environment before applying. 
+The destroy pipeline can only be started manually. All three authenticate to AWS with OIDC, so no access keys are stored in GitHub.
