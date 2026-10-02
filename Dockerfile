@@ -12,7 +12,6 @@ WORKDIR /app
 COPY --from=builder app/build /usr/share/nginx/html/
 EXPOSE 8080
 
-# I used 'nginxinc/nginx-unprivileged' as it runs nginx
-# as a non root user 
+
 
 

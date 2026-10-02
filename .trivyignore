@@ -1,8 +1,3 @@
-# ALB is intentionally internet-facing; it serves the Threat Composer web app to users
 AVD-AWS-0053
-
-# ECS tasks need outbound HTTPS to ECR, S3 and CloudWatch, which have no fixed IPs
 AVD-AWS-0104
-
-# Public subnets auto-assign public IPs; only the ALB and NAT gateway live here, and both manage their own IPs
 AWS-0164
